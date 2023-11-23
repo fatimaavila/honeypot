@@ -13,7 +13,7 @@ def handle_connection(client_sock):
     transport = paramiko.Transport(client_sock)
     server_key= paramiko.RSAKey.from_private_key_file('key')
     transport.add_server_key(server_key)
-    ssh = paramiko.ServerInterface()
+    ssh = SSHServer()
     transport.start_server(server=ssh)
 
 def main():
