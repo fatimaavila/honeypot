@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import socket
+import paramiko
 
 def main():
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
