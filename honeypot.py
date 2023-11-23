@@ -17,6 +17,7 @@ def handle_connection(client_sock):
     transport.start_server(server=ssh)
 
 def main():
+    print("Iniciando dummy SSH server como honeypot 🍯")
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_sock.bind(('', 2222))
