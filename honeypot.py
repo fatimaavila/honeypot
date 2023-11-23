@@ -25,6 +25,8 @@ def main():
     while True:
         client_sock, client_addr = server_sock.accept()
         print(f"Connection from {client_addr[0]}:{client_addr[1]}")
+        t = threading.Thread(target=handle_connection, args=(client_sock,))
+        t.start()
         
     ## prueba
     
