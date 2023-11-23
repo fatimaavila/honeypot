@@ -9,7 +9,7 @@ class SSHServer(paramiko.ServerInterface):
         print(f"{username}:{password}")
         return paramiko.AUTH_FAILED
 
-def handle_connection(client_sock)
+def handle_connection(client_sock):
     transport = paramiko.Transport(client_sock)
     server_key= paramiko.RSAKey.from_private_key_file('key')
     transport.add_server_key(server_key)
