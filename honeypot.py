@@ -6,7 +6,9 @@ import threading
 class SSHServer(paramiko.ServerInterface):
 
     def check_auth_password(self, username: str, password: str) -> int:
-        print(f"{username}:{password}")
+        client_ip = client_sock.getpeername()[0]
+        print(f"Connection from {client_ip} - {username}:{password}")
+        #print(f"{username}:{password}")
         return paramiko.AUTH_FAILED
 
 def handle_connection(client_sock):
