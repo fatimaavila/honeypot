@@ -9,8 +9,11 @@ def main():
 
     client_sock, client_addr = server_sock.accept()
     print(f"Connection from {client_addr[0]}:{client_addr[1]}")
-    client_sock.send(b"Hello!\n")
-    print(client_sock.recv(256).decode())
+    transport = paramiko.Transport(client_sock)
+    server_key= paramiko.RSAKey.from_private_key_file('key')
+    transport.add_server_key(server_key)
+    ssh = paramiko.ServerInterface()
+    transport.start_server(server=ssh)
     ## prueba
     
 
