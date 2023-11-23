@@ -5,17 +5,20 @@ import threading
 
 class SSHServer(paramiko.ServerInterface):
 
+    def __init__(self, client_sock):
+        self.client_sock = client_sock
+        super().__init__()
+
     def check_auth_password(self, username: str, password: str) -> int:
-        client_ip = client_sock.getpeername()[0]
+        client_ip = self.client_sock.getpeername()[0]
         print(f"Connection from {client_ip} - {username}:{password}")
-        #print(f"{username}:{password}")
         return paramiko.AUTH_FAILED
 
 def handle_connection(client_sock):
     transport = paramiko.Transport(client_sock)
-    server_key= paramiko.RSAKey.from_private_key_file('key')
+    server_key = paramiko.RSAKey.from_private_key_file('key')
     transport.add_server_key(server_key)
-    ssh = SSHServer()
+    ssh = SSHServer(client_sock)
     transport.start_server(server=ssh)
 
 def main():
@@ -30,10 +33,6 @@ def main():
         print(f"Connection from {client_addr[0]}:{client_addr[1]}")
         t = threading.Thread(target=handle_connection, args=(client_sock,))
         t.start()
-        
-    ## prueba
-    
 
 if __name__ == "__main__":
     main()
- 
