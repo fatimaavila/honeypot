@@ -1,5 +1,5 @@
 # honeypot
-#Seguridad informatica y encripacion
+# Seguridad informática y encriptación
 
 
 # Pasos 🐝
